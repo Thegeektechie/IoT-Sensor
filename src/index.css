@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 120 100% 0%;
+    --foreground: 120 100% 50%;
+
+    --card: 120 33% 3%;
+    --card-foreground: 120 100% 50%;
+
+    --popover: 120 33% 3%;
+    --popover-foreground: 120 100% 50%;
+
+    --primary: 120 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 195 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 300 100% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 0%;
+
+    --border: 120 100% 50%;
+    --input: 120 33% 3%;
+    --ring: 120 100% 50%;
+
+    --radius: 0px;
+
+    --chart-1: 120 100% 50%;
+    --chart-2: 195 100% 50%;
+    --chart-3: 300 100% 50%;
+    --chart-4: 60 100% 50%;
+    --chart-5: 25 100% 50%;
+
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 120 100% 50%;
+    --sidebar-primary: 120 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 195 100% 50%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 120 100% 50%;
+    --sidebar-ring: 120 100% 50%;
+
+    --terminal-green: 120 100% 50%;
+    --terminal-cyan: 195 100% 50%;
+    --terminal-magenta: 300 100% 50%;
+    --terminal-yellow: 60 100% 50%;
+    --terminal-orange: 25 100% 50%;
+    --terminal-red: 0 100% 50%;
+
+    --glow-green: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px rgba(0, 255, 0, 0.6);
+    --glow-cyan: 0 0 10px #00ccff, 0 0 20px #00ccff;
+    --glow-magenta: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    letter-spacing: 0.05em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 0 10px hsl(var(--terminal-green)), 0 0 20px hsl(var(--terminal-green)), 0 0 30px hsl(var(--terminal-green) / 0.6);
+    font-weight: 700;
+  }
+
+  p, span, div {
+    text-shadow: 0 0 5px hsl(var(--terminal-green) / 0.4);
+  }
+}
+
+@layer components {
+  .terminal-border {
+    border-color: hsl(var(--terminal-green));
+    box-shadow: inset 0 0 10px hsl(var(--terminal-green) / 0.1), 0 0 15px hsl(var(--terminal-green) / 0.15);
+  }
+
+  .terminal-input {
+    border-color: hsl(var(--terminal-green)) !important;
+    box-shadow: 0 0 10px hsl(var(--terminal-green) / 0.2) !important;
+    background-color: hsl(var(--card)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .terminal-button {
+    text-shadow: 0 0 10px hsl(var(--terminal-green)), 0 0 20px hsl(var(--terminal-green));
+    border-color: hsl(var(--terminal-green));
+    transition: all 0.3s ease;
+  }
+
+  .terminal-button:hover {
+    box-shadow: 0 0 20px hsl(var(--terminal-green)), 0 0 40px hsl(var(--terminal-green)), inset 0 0 10px hsl(var(--terminal-green) / 0.1);
+  }
+
+  .glow-text-green {
+    color: hsl(var(--terminal-green));
+    text-shadow: var(--glow-green);
+  }
+
+  .glow-text-cyan {
+    color: hsl(var(--terminal-cyan));
+    text-shadow: var(--glow-cyan);
+  }
+
+  .glow-text-magenta {
+    color: hsl(var(--terminal-magenta));
+    text-shadow: var(--glow-magenta);
+  }
+
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--terminal-green) / 0.03) 2px,
+      hsl(var(--terminal-green) / 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px hsl(var(--terminal-green) / 0.3); }
+  50% { box-shadow: 0 0 20px hsl(var(--terminal-green) / 0.6), 0 0 40px hsl(var(--terminal-green) / 0.3); }
+}
